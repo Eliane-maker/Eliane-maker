@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="Author" content="Eliane-Herode">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Anniversaire.css">
+        <title>Manipulation de la Date</title>
+    </head>
+    <body style="text-align: center; font-family: Arial, Helvetica, sans-serif;">
+        <section class="design">
+            <div>
+                <h1>Veuillez saisir votre date au format (JJ-MM-AAAA)</h1>
+                <br><p>Verifier quand sera votre anniversaire:</p>
+                <input type="text" id="entrezdate" placeholder="Ex: 07-02-1994">
+                <button onclick="afficherDate()">Cliquez ici pour afficher</button>
+            </div>
+            <div>
+                <p id="jour"></p>
+                <p id="mois"></p>
+                <p id="annee"></p>
+                <p id="question"></p>
+                <p id="different"></p>
+            </div>
+        </section>
+
+        <section>
+            <script>
+                function afficherDate(){
+                    const saisir = document.getElementById("entrezdate").value;
+                    const legex = /(\d{2})-(\d{2})-(\d{4})$/;
+
+                    const match = saisir.match(legex);
+
+                    if(!match){
+                        alert("Veuillez saisir la date au format correct.");
+                        return;
+                    }
+
+                    const [_,jj,mm,aaaa] = match;
+                    const dateObj = new Date(aaaa, mm-1, jj);
+                    
+                    if(isNaN(dateObj.getTime())){
+                        alert("Date invalide");
+                        return;
+                    }
+                    document.getElementById("jour").textContent = "Votre jour est:  " + jj;
+                    document.getElementById("mois").textContent = "Votre mois est:  " + mm;
+                    document.getElementById("annee").textContent = "Et l'annee est:  " + aaaa;
+                    document.getElementById("question").textContent = "Est-ce exact?";
+
+                    const today = new Date();
+                    today.setHours(0,0,0,0);
+                    const differentMois = dateObj.getTime() - today.getTime();
+                    const differentJours = Math.round(differentMois / (1000 * 60 * 60 * 24));
+                    let message;
+
+                    if(differentJours>0){
+                        message = "Alors votre anniversaire sera dans  " + differentJours + " jour(s).";
+                    }else if(differentJours<0){
+                        message = "Donc votre anniversaire est deja passe depuis " + Math.abs(differentJours) + " jour(s).";
+                    }else{
+                        message = "Felicitations Votre anniversaire c'est pour Ajourd'hui (Enjoy!!!)";
+                    }
+                    document.getElementById("different").textContent = message;
+                }
+            </script>
+        </section>
+    </body>
+</html>

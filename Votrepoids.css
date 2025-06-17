@@ -1,0 +1,14 @@
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.design{
+    background-color: rgba(149, 240, 243, 0.774);
+    border-radius: 15px;
+    box-shadow: 10px 30px 35px rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    margin: 8% auto 0;
+    width: 380px;
+    text-align: center;
+    animation: transform 0s ease-in-out infinite;
+
+}
